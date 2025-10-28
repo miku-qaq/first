@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜词游戏</title>
+    <script src="guess.js"></script>
+</head>
+
+<style>
+h1{
+  text-align: center;
+  
+}
+
+#panel{
+  border-radius: 8px;
+  
+  height: 300px;
+  width: 700px;
+  margin: 20px auto 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation-name: rgb;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  
+}
+
+@keyframes rgb{
+    0%{box-shadow: 6px 6px 10px 10px red;}
+    25%{box-shadow: 6px 6px 10px 10px green;}
+    50%{box-shadow: 6px 6px 10px 10px blue;}
+    75%{box-shadow: 6px 6px 10px 10px yellow;}
+    100%{box-shadow: 6px 6px 10px 10px red;}
+}
+
+
+
+#playerPanel{
+  display: flex;
+  margin-top: 20px;
+  flex-wrap: nowrap;
+  padding: 20px;
+  column-gap: 80px;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.play{
+  width: 370px;
+  height: 220px;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 20px;
+  box-sizing: border-box;
+  background-image: url("https://image.baidu.com/search/detail?ct=503316480&z=undefined&tn=baiduimagedetail&ipn=d&word=聊天框&step_word=&lid=10573145272833490343&ie=utf-8&in=&cl=2&lm=-1&st=undefined&hd=undefined&latest=undefined&copyright=undefined&cs=4127779117,1246695384&os=1934292137,2602784088&simid=4127779117,1246695384&pn=5&rn=1&di=7410818322373017601&ln=1790&fr=&fmq=1730259201391_R&fm=&ic=undefined&s=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&is=0,0&istype=0&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=1e&objurl=https%3A%2F%2Fsrc.sotu114.com%2Fdata%2Fattachment%2Fforum%2F202012%2F19%2F113015fjrh5uu1tzt2zwjd.thumb.jpg-ture&rpstart=0&rpnum=0&adpicid=0&nojc=undefined&dyTabStr=MCwzLDEsMiwxMyw3LDYsNSwxMiw5");
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 20px;
+
+
+}
+
+li{
+  display: inline-block;
+}
+
+.point{
+  height: 30px;width: 30px;background-color: rgb(255, 255, 255);
+  border-radius: 1000px;
+  transition: all 2s;
+  
+}
+
+
+img{
+  border-radius: 1000px;
+  width: 50px;
+  height: 50px;
+}
+
+
+body{
+  min-width: 856px;
+}
+
+p{
+  font-style: oblique;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h3{
+  font-size: x-large;
+}
+
+.playwin{
+  font-size: xx-large;
+  background-color: aqua;
+  text-shadow: 2px 2px 2px red;
+}
+</style>
+
+
+<body onload="init()">
+
+<!-- 标题 -->
+<h1>
+  <span style="background-clip:text; color: transparent; background-image:linear-gradient(to right,rgb(89, 238, 25),rgb(223, 76, 83),rgb(21, 220, 127),blue,yellow,pink);font-size: xx-large;">
+  猜词游戏
+  </span>
+</h1>
+
+
+<!-- 单词面板 -->
+<div id="panel">
+  <h1 id="meme"></h1>
+</div>
+    
+
+<div id="playerPanel">
+
+  <!-- player1的面板 -->
+  <div class="play" id="bg1" style="transition:all 1s;">
+    
+    <!-- 玩家信息面板 -->
+    <div style="width: 200px;">
+      <!-- 图片 p1的面板 -->
+      <div style="display: flex;column-gap: 5px;align-items: center;height: 55px;">
+        <p style="font-size:x-large;">p1:</p>
+        <img src="https://img2.baidu.com/it/u=446981511,947966320&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1730307600&t=ded40a96864cf2cb06e080dab4e69c81" alt="" >
+      </div>
+      <!-- 技能和小绿点 -->
+      <ul style="list-style: none;padding: 0%;">
+        <li><button class="point" id="bt1"></button></li>
+        <li><button class="point" id="bt2"></button></li>
+        <li><button id="skill1" onclick="bid1()" style="height: 30px;width: 70px;margin-left: 20px;">无技能</button></li>
+      </ul>
+      <!-- 血量显示 -->
+      <img src="https://img.icons8.com/?size=96&id=DFU1kReSUccu&format=png" alt="" > X 
+      <span id="health1">777</span>
+    </div>
+
+    <!-- 输入显示 -->
+    <div style="border-left: 1px solid black;box-sizing: border-box;">
+      <h3 style="padding-left: 5px;box-sizing: border-box;">本次输入：</h3>
+      <p id="content1" style="text-align: center;font-size: xx-large;"></p>
+    </div>
+
+  </div>
+
+  <!-- player2面板 -->
+  <div class="play" id="bg2" style="transition:all 1s;">
+
+    <!-- 玩家信息面板 -->
+    <div style="width: 200px;">
+      <!-- 图片 p1的面板 -->
+      <div style="display: flex;column-gap: 5px;align-items: center;height: 55px;">
+        <p style="font-size:x-large;">p2:</p>
+        <img src="https://ts3.cn.mm.bing.net/th?id=OIP-C.mIFhOinyZIi0CThCeqWF5AHaEJ&w=333&h=187&c=8&rs=1&qlt=90&o=6&dpr=2&pid=3.1&rm=2" alt="" >
+      </div>
+      <!-- 技能和小绿点 -->
+      <ul style="list-style: none;padding: 0%;">
+        <li><button class="point" id="bt3"></button></li>
+        <li><button class="point" id="bt4"></button></li>
+        <li><button id="skill2" onclick="bid2()" style="height: 30px;width: 70px;margin-left: 20px;">无技能</button></li>
+      </ul>
+      <!-- 血量显示 -->
+      <img src="https://img.icons8.com/?size=96&id=DFU1kReSUccu&format=png" alt="" > X 
+      <span id="health2">777</span>
+    </div>
+
+    <!-- 输入显示 -->
+    <div style="border-left: 1px solid black;box-sizing: border-box;">
+      <h3 style="padding-left: 5px;box-sizing: border-box;">本次输入：</h3>
+      <p id="content2" style="text-align: center;font-size: xx-large;"></p>
+    </div>
+
+  </div>
+
+</div>
+
+
+</body>
+</html>
